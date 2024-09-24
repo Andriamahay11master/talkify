@@ -1,50 +1,69 @@
-# React + TypeScript + Vite
+# Application de messagerie instantanée
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Talkify est une application de messagerie instantanée qui facilite les échanges rapides et fluides. Discute en temps réel, partage des fichiers multimédias et crée des groupes de conversation avec facilité. Reste connecté où que tu sois grâce à des notifications en temps réel. Elle est développé avec
+avec **React JS**, **TypeScript**, **Vite**, **HTML**,**SCSS**, **Firebase**, **MongoDB** et **NodeJS**.
 
-Currently, two official plugins are available:
+## Fonctionnalités principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Messagerie de base** : Envoi et réception de messages texte en temps réel, support des emojis, et notifications en temps réel pour les nouveaux messages.
+- **Authentification des utilisateurs** : Inscription par numéro de téléphone ou e-mail avec vérification OTP, et profils utilisateurs configurables avec nom et photo.
+- **Listes de contacts** : Synchronisation des contacts téléphoniques et fonction de recherche pour ajouter des utilisateurs.
+- **Notifications et statuts des messages** : Notifications push pour les messages, accusés de réception, et affichage des statuts "en ligne" ou "vu pour la dernière fois".
+- **Chats de groupe** : Création et modération de groupes, avec notifications spécifiques pour les messages de groupe.
+- **Partage de médias** : Envoi de photos, vidéos, et fichiers, avec une galerie pour les médias partagés.
+- **Messagerie vocale** : Envoi et écoute de messages audio avec option de lecture rapide.
+- **Système de notifications** : Notifications push personnalisables, avec possibilité de désactiver certaines notifications et de mettre en sourdine.
+- **Archivage et suppression de discussions** : Archivage de chats et option de suppression de messages pour soi ou pour tous.
+- **Sécurité** : Cryptage de bout en bout pour la protection des messages et option de blocage de contacts indésirables.
+- **Statuts** : Partage de statuts (texte, photos, vidéos) qui disparaissent après 24 heures, avec possibilité de visualisation et de réaction par les contacts.
 
-## Expanding the ESLint configuration
+## Technologies utilisées
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React JS & TypeScript** : Pour une architecture modulaire et un typage strict.
+- **Vite JS** : Utilisé pour le build rapide et le développement avec Hot Module Replacement (HMR).
+- **SCSS** : Pour une gestion avancée des styles avec un design réactif.
+- **Firebase Auth** : Pour la gestion des utilisateurs.
+- **Mongo DB** : Pour la gestion des données.
+- **Node JS** : Pour le serveur.
 
-- Configure the top-level `parserOptions` property like this:
+## Installation et démarrage
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Clonez le dépôt :
+
+```bash
+git clone https://github.com/Andriamahay11master/talkify.git
+cd Talkify
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Installez les dépendances :
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+3. Lancez l'application en mode développement :
+
+```bash
+npm run dev
+```
+
+4. Accédez à l'application sur `http://localhost:5173`.
+
+## Structure du projet
+
+- **src/** : Contient le code source de l'application.
+  - **components/** : Composants réutilisables tels que les formulaires, alertes, tableaux, etc.
+  - **pages/** : Pages principales de l'application.
+  - **assets/** : Fichiers SCSS pour la gestion des styles globaux et des composants.
+  - **models/** : Pour le typage des données.
+  - **data/** : Pour les données statiques utilisés par l'application.
+
+## Commandes utiles
+
+- **`npm run dev`** : Démarre l'application en mode développement.
+- **`npm run build`** : Génère un build de production.
+- **`npm run lint`** : Vérifie et corrige le code avec ESLint.
+
+## Contribution
+
+Les contributions sont les bienvenues. Si vous souhaitez contribuer, ouvrez un problème ou une pull request.
