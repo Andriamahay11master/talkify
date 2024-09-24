@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.scss'
 import './assets/scss/main.scss'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import Home from './pages/home/Home'
+import SignIn from './pages/signIn/SignIn'
+import SignUp from './pages/signUp/SignUp'
+import Profil from './pages/profil/Profil'
+import Calls from './pages/calls/Calls'
+import ChatList from './pages/chats/ChatList'
+import Group from './pages/newGroup/Group'
+import GroupList from './pages/group/GroupList'
+import Chat from './pages/newChat/Chat'
+import Logout from './pages/logout/Logout'
+import Notification from './pages/notifications/Notification'
+import Settings from './pages/settings/Settings'
+import Splashscreen from './pages/splashscreen/Splashscreen'
+import Status from './pages/status/Status'
+import Error404 from './pages/404/Error404'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Home/>} />
+        <Route path='/signIn' element={<SignIn />}/>
+        <Route path='/signUp' element={<SignUp />}/>
+        <Route path='/profil' element={<Profil />}/>
+        <Route path='/calls' element={<Calls/>} />
+        <Route path='/chats' element={<ChatList/>} />
+        <Route path='/groups' element={<GroupList/>} />
+        <Route path='/chat' element={<Chat/>} />
+        <Route path='/group' element={<Group/>} />
+        <Route path='/logout' element={<Logout/>} />
+        <Route path='/notifications' element={<Notification/>} />
+        <Route path='/settings' element={<Settings/>} />
+        <Route path='/splashscreen' element={<Splashscreen/>} />
+        <Route path='/status' element={<Status/>} />
+        <Route path='*' element={<Error404/>}/>
+      </Routes>
+    </Router>
   )
 }
 
