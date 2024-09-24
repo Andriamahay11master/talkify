@@ -1,9 +1,44 @@
 .main-page{
-    padding-top: 75px;
-    background: $default-bg;
-    min-height: calc(100vh - 54px);
-    @include max(1200px){
-        padding-top: 85px;
+    background: $color-primary;
+    position: relative;
+    height: 100vh;
+    .main-logo{
+      width: 20vw;
+      margin: auto;
+      @include max(992px){
+        width: 300px;
+      }
+      img{
+        width: 100%;
+        height: auto;
+      }
+    }
+    &.page-home{
+      .main-logo{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    .main-welcome{
+      padding: 40px 10px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      h1{
+        margin-bottom: 10px;
+      }
+      p{
+        margin-bottom: 30px;
+        @include max(992px){
+          width: 50%;
+          margin: auto;
+          margin-bottom: 30px;
+        }
+      }
     }
     .main-page-top{
         display: flex;
