@@ -12,12 +12,12 @@
     display: block;
     margin: auto;
     margin-bottom: 10px;
-    max-width: 150px;
+    max-width: 400px;
     border-radius: 20px;
     overflow: hidden;
     animation: bounce 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-    @include max(768px) {
-      max-width: 100px;
+    @include max(992px) {
+      max-width: 300px;
     }
   }
   .splashscreen-title {
