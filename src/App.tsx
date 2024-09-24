@@ -15,8 +15,24 @@ import Settings from './pages/settings/Settings'
 import Splashscreen from './pages/splashscreen/Splashscreen'
 import Status from './pages/status/Status'
 import Error404 from './pages/404/Error404'
+import { useEffect, useState } from 'react'
 
 function App() {
+  
+  const [isFetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 2500)); 
+      setIsFetching(false);
+    };
+    fetchData();
+  }, []);
+
+  if (isFetching) {
+    return <Splashscreen />
+  }
+
   return (
     <Router>
       <Routes>
