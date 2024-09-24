@@ -1,5 +1,4 @@
 import './App.scss'
-import './assets/scss/main.scss'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import Home from './pages/home/Home'
 import SignIn from './pages/signIn/SignIn'
