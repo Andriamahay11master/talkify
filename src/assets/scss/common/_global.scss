@@ -1,0 +1,116 @@
+html{
+  scroll-behavior:smooth;
+}
+
+::selection {
+  color: white;
+  background: $color-primary;
+}
+
+*::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba($black,0.3);
+	border-radius: 10px;
+	background-color: $white-f4;
+}
+
+*::-webkit-scrollbar
+{
+	width: 5px;
+  height: 5px;
+	background-color: $white-f4;
+}
+
+*::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: $color-primary;
+}
+
+body {
+  font-family: $font-family;
+  font-size: 16px;
+  line-height: 1.45;
+  overflow-x: hidden;
+  scroll-behavior:smooth;
+  @include max(1280px) {
+    font-size: 15px;
+  }
+}
+
+h1, .title-h1{
+  font-size: 60px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #000;
+  @include max(1440px){
+    font-size: 40px;
+  }
+  @include max(768px){
+    font-size: 34px;
+  }
+}
+
+
+h2, .title-h2{
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #000;
+
+  &.white {
+    color: #fff;
+  }
+}
+
+h3, .title-h3{
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #000;
+  @include max(1440px){
+    font-size: 24px;
+  }
+  @include max(768px){
+    font-size: 20px;
+  }
+}
+
+h4, .title-h4{
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #000;
+  @include max(1440px){
+    font-size: 15px;
+  }
+  @include max(768px){
+    font-size: 14px;
+  }
+}
+
+.container {
+  margin: 0 135px;
+  @include max(1440px) {
+    margin: 0 50px;
+  }
+  @include max(768px) {
+    margin: 0 15px;
+  }
+
+}
+
+.container-transverse{
+  margin: 0 135px;
+  @include max(1440px){
+    margin: 0 50px;
+  }
+  @include max(768px){
+    margin: 0 15px;
+  }
+}
+
+
+
+

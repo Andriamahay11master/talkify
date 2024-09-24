@@ -1,0 +1,27 @@
+.tooltip {
+  position: relative;
+  cursor: pointer;
+  &::after{
+    content: attr(data-title);
+    position: absolute;
+    bottom: 100%; /* Positionné au-dessus du bouton */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    font-size: 14px;
+    z-index: 10;
+  }
+  &:hover{
+    &::after{
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
