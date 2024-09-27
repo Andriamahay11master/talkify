@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, Navigate } from 'react-router-dom';
-import { PhoneAuthProvider, RecaptchaVerifier ,signInWithCredential,signInWithPhoneNumber, User } from "firebase/auth";
-import { auth } from "../../firebase";
+import { supabase } from "../../supabaseClient";
 
 import Splashscreen from "../splashscreen/Splashscreen";
+import { User } from "@supabase/supabase-js";
 
 
 interface SigninProps {
@@ -16,97 +16,47 @@ export default function SignIn({user} : SigninProps) {
     const [success, setSuccess] = React.useState(false);
     const [errorExist, setErrorExist] = React.useState(false);
     const [errorForm, setErrorForm] = React.useState('');
-    const [codeError, setCodeError] = React.useState('');
-    const [verificationId, setVerificationId] = React.useState<string | null>(null);
-    const [recaptchaVerifier, setRecaptchaVerifier] = React.useState<RecaptchaVerifier | null>(null);
+    const [verificationId, setVerificationId] = React.useState<boolean>(false);
 
-    useEffect(() => {
-        // Setup Recaptcha after the component mounts
-        setupRecaptcha();
-    }, []);
-
-    const setupRecaptcha = () => {
-        const recaptchaElement = document.getElementById('recaptcha-container');
-        if (!recaptchaElement) {
-            console.error('Recaptcha container not found');
-            return;
-        }
-
-        const verifier = new RecaptchaVerifier(auth, recaptchaElement, {
-            size: 'invisible',
-            callback: (response: string) => {
-                console.log("Recaptcha verified", response);
-            },
-            'expired-callback': () => {
-                console.log("Recaptcha expired, please solve again.");
-            }
-        });
-
-        verifier.render().then(() => {
-            setRecaptchaVerifier(verifier);
-        }).catch((error) => {
-            console.error("Recaptcha render error:", error);
-        });
-    };
-    
-
-    const connectAccount = (e : React.FormEvent) => {
+    const connectAccount = async (e : React.FormEvent) => {
         e.preventDefault();
-        if(!phoneNumber) return;
-
-        if (!recaptchaVerifier) {
-            setupRecaptcha();  // Initialise recaptcha si ce n'est pas fait
-        }
+        if(!phoneNumber) return
         
-        signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier as RecaptchaVerifier)
-        .then((confirmationResult) => {
-            setVerificationId(confirmationResult.verificationId);
-            // SMS sent, show the user a UI to enter the code
-            console.log("SMS sent");
-        })
-        .catch((error) => {
+        const { error } = await supabase.auth.signInWithOtp({ phone: phoneNumber });
+        if (error) {
             console.error(error);
             setErrorExist(true);
-            setCodeError(error.code);
-            manageMessageError();
-        });
+            setErrorForm('Erreur lors de l\'envoi du code');
+        } else {
+            setVerificationId(true); // Le code a été envoyé, afficher le champ de vérification
+            console.log("SMS envoyé");
+        }
     }
 
-    const verifyCode = (e: React.FormEvent) => {
+    const verifyCode = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!verificationId || !verificationCode) return;
 
-        const credential = PhoneAuthProvider.credential(verificationId, verificationCode);
+        // Vérifier le code OTP
+        const { error, data } = await supabase.auth.verifyOtp({
+            phone: phoneNumber,
+            token: verificationCode,
+            type: 'sms'
+        });
 
-        signInWithCredential(auth, credential)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                localStorage.setItem('userBabyTrack', JSON.stringify(user));
-                localStorage.setItem('isLoggedIn', 'true');
-                setSuccess(true);
-                console.log(user);
-            })
-            .catch((error) => {
-                console.error(error);
-                setErrorExist(true);
-                setCodeError(error.code);
-                manageMessageError();
-            });
-    };
-
-    const manageMessageError = () => {
-        switch (codeError) {
-            case 'auth/invalid-phone-number':
-                setErrorForm('Invalid phone number');
-                break;
-            case 'auth/missing-verification-code':
-                setErrorForm('Missing verification code');
-                break;
-            default:
-                setErrorForm('Invalid phone number or code');
-                break;
+        if (error) {
+            console.error(error);
+            setErrorExist(true);
+            setErrorForm('Code de vérification incorrect');
+        } else {
+            // Authentification réussie
+            localStorage.setItem('userTalkify', JSON.stringify(data.user));
+            localStorage.setItem('isLoggedIn', 'true');
+            setSuccess(true);
+            console.log(data.user);
         }
     };
+
 
     const onChangePhoneNumber = (e : React.ChangeEvent<HTMLInputElement>) => {
         setPhoneNumber(e.target.value);
