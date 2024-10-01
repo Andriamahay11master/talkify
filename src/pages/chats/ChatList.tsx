@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './chatlist.scss'
 import { supabase } from "../../supabaseClient";
 import { Navigate } from 'react-router-dom';
+import Splashscreen from '../splashscreen/Splashscreen';
 
 export default function ChatList() {
     const [email, setEmail] = useState<string>("");
@@ -23,6 +24,16 @@ export default function ChatList() {
     })
 
     return (
-        <div>ChatList{email} {uid}</div>
-    );
+        <>
+            {(uid !== "") ? (
+              <>
+                <div>ChatList{email} {uid}</div>
+              </>  
+            ) : (
+                <Splashscreen/>
+            )}
+        </>
+    )
 }
+
+ChatList.requireAuth = true
