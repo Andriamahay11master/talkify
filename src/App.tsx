@@ -55,7 +55,7 @@ function App() {
         <Route path='/signUp' element={<SignUp />}/>
         <Route path='/profil' element={<Profil />}/>
         <Route path='/calls' element={<Calls/>} />
-        <Route path='/chats' element={<ChatList/>} />
+        <Route path='/chats' element={<ProtectedRoute user={user}><ChatList/></ProtectedRoute>} />
         <Route path='/groups' element={<GroupList/>} />
         <Route path='/chat' element={<Chat/>} />
         <Route path='/group' element={<Group/>} />

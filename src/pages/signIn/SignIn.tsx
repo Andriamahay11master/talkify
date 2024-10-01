@@ -70,7 +70,7 @@ export default function SignIn({user} : SigninProps) {
 
     if(user && localStorage.getItem('isLoggedIn') === 'true') {
         console.log("********sign in",localStorage.getItem('isLoggedIn'));
-        return <Navigate to="/" />
+        return <Navigate to="/chats" />
     }
 
     
