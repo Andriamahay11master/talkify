@@ -3,6 +3,8 @@ import './chatlist.scss'
 import { supabase } from "../../supabaseClient";
 import { Navigate } from 'react-router-dom';
 import Splashscreen from '../splashscreen/Splashscreen';
+import Menu from '../../components/menu/Menu';
+import { menu } from '../../data/header';
 
 export default function ChatList() {
     const [email, setEmail] = useState<string>("");
@@ -27,6 +29,7 @@ export default function ChatList() {
         <>
             {(uid !== "") ? (
               <>
+                <Menu linkMenu={menu}/>
                 <div>ChatList{email} {uid}</div>
               </>  
             ) : (
