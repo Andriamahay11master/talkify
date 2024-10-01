@@ -16,9 +16,13 @@ import Splashscreen from './pages/splashscreen/Splashscreen'
 import Status from './pages/status/Status'
 import Error404 from './pages/404/Error404'
 import { useEffect, useState } from 'react'
+import { ProtectedRoute } from './ProtectedRoute'
+import { User } from '@supabase/supabase-js'
+import { supabase } from "./supabaseClient";
 
 function App() {
   
+  const [user, setUser] = useState<User | null>(null);
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
@@ -27,6 +31,16 @@ function App() {
       setIsFetching(false);
     };
     fetchData();
+      const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+        if (session) {
+            setUser(session.user); // L'utilisateur est connecté
+        } else {
+            setUser(null); // Pas d'utilisateur
+        }
+        setIsFetching(false); // L'authentification est vérifiée
+    });
+
+    return () => authListener.subscription.unsubscribe();
   }, []);
 
   if (isFetching) {
@@ -36,8 +50,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/signIn' element={<SignIn />}/>
+        <Route path='/' element={<ProtectedRoute user={user}><Home/></ProtectedRoute>} />
+        <Route path='/signIn' element={<SignIn user={user}/>}/>
         <Route path='/signUp' element={<SignUp />}/>
         <Route path='/profil' element={<Profil />}/>
         <Route path='/calls' element={<Calls/>} />
