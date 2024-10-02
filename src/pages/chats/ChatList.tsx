@@ -31,6 +31,11 @@ export default function ChatList() {
             {(uid !== "") ? (
               <>
                 <Menu linkMenu={menu}/>
+                <div className="main-page main-page-chat">
+                    <div className="container">
+
+                    </div>
+                </div>
                 <div>ChatList{email} {uid}</div>
               </>  
             ) : (

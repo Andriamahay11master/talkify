@@ -16,7 +16,7 @@ export default function Menu({linkMenu} : MenuProps) {
                 </div>
                 <div className="menu-search">
                     <button className="btn btn-icon"><i className="icon-search"></i></button>
-                    <button className="btn btn-icon"><i className="icon-profil"></i></button>
+                    <button className="btn btn-icon"><i className="icon-dots-horizontal"></i></button>
                 </div>
             </div>
             <div className="menu-bottom">

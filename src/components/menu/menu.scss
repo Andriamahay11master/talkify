@@ -1,0 +1,61 @@
+@import '../../assets/scss/common/variable';
+@import '../../assets/scss/common/mixins';
+
+.menu{
+    padding: 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    .menu-top{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 41px;
+        .menu-logo{
+            .title-h1{
+                color: $color-primary;
+            }
+        }
+        .menu-search{
+            display: flex;
+            gap:18px;
+            i{
+                font-size: 20px;
+            }
+        }
+    }
+    .menu-bottom{
+        .navMenu{
+            display: flex;
+            li{
+                padding: 0 20px;
+                &:first-child{
+                    padding-left: 0;
+                }
+            }
+            a{
+                text-decoration: none;
+                position: relative;
+                font-weight: 600;
+                &::after{
+                    content: "";
+                    position: absolute;
+                    bottom: -2px;
+                    left: 0;
+                    width: 0;
+                    height: 3px;
+                    background: $color-primary;
+                    transition: all 0.3s;
+                }
+                &.active{
+                    color: $color-primary;
+                    &::after{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
