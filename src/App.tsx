@@ -54,16 +54,16 @@ function App() {
         <Route path='/signIn' element={<SignIn user={user}/>}/>
         <Route path='/signUp' element={<SignUp />}/>
         <Route path='/profil' element={<Profil />}/>
-        <Route path='/calls' element={<Calls/>} />
+        <Route path='/calls' element={<ProtectedRoute user={user}><Calls/></ProtectedRoute>} />
         <Route path='/chats' element={<ProtectedRoute user={user}><ChatList/></ProtectedRoute>} />
-        <Route path='/groups' element={<GroupList/>} />
+        <Route path='/groups' element={<ProtectedRoute user={user}><GroupList/></ProtectedRoute>} />
         <Route path='/chat' element={<Chat/>} />
         <Route path='/group' element={<Group/>} />
         <Route path='/logout' element={<Logout/>} />
         <Route path='/notifications' element={<Notification/>} />
         <Route path='/settings' element={<Settings/>} />
         <Route path='/splashscreen' element={<Splashscreen/>} />
-        <Route path='/status' element={<Status/>} />
+        <Route path='/status' element={<ProtectedRoute user={user}><Status/></ProtectedRoute>} />
         <Route path='*' element={<Error404/>}/>
       </Routes>
     </Router>
