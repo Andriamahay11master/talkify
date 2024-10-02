@@ -12,7 +12,7 @@ export default function Menu({linkMenu} : MenuProps) {
         <div className="menu">
             <div className="menu-top">
                 <div className="menu-logo">
-                    <img src="/logo-talkify.png" alt="Logo Talk" />
+                    <h1 className="title-h1">Talkify</h1>
                 </div>
                 <div className="menu-search">
                     <button className="btn btn-icon"><i className="icon-search"></i></button>

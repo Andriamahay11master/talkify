@@ -12,6 +12,7 @@ export default function ChatList() {
 
     useEffect(() => {
         const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+            console.log("Auth Event: ", event);
             if (session && session.user) {
                 const email = session.user.email;
                 const uid = session.user.id; // Supabase utilise `id` au lieu de `uid`
