@@ -5,6 +5,8 @@ import { Navigate } from 'react-router-dom';
 import Splashscreen from '../splashscreen/Splashscreen';
 import Menu from '../../components/menu/Menu';
 import { menu } from '../../data/header';
+import { listChat } from '../../data/chat';
+import ItemChat from '../../components/itemChat/ItemChat';
 
 export default function ChatList() {
     const [email, setEmail] = useState<string>("");
@@ -33,7 +35,11 @@ export default function ChatList() {
                 <Menu linkMenu={menu}/>
                 <div className="main-page main-page-chat">
                     <div className="container">
-
+                        <div className="content">
+                            {listChat.map((chat, index) => {
+                                return <ItemChat key={index} imgSrc={chat.imgSrc} name={chat.name} date={chat.date} text={chat.text} />
+                            })}
+                        </div>
                     </div>
                 </div>
                 <div>ChatList{email} {uid}</div>

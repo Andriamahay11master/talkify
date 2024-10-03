@@ -96,13 +96,7 @@ h4, .title-h4{
 }
 
 .container {
-  margin: 0 135px;
-  @include max(1440px) {
-    margin: 0 50px;
-  }
-  @include max(768px) {
-    margin: 0 15px;
-  }
+  margin: 0 15px;
 
 }
 

@@ -23,6 +23,12 @@
     }
     &.main-page-chat{
       background: #FFF;
+      .content{
+        padding-top: 200px;
+        @include max(992px){
+          padding-top: 163px;
+        }
+      }
     }
     .main-welcome{
       padding: 40px 10px;

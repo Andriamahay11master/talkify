@@ -1,2 +1,37 @@
 @import '../../assets/scss/common/variable';
 @import '../../assets/scss/common/mixins';
+
+.itemChat{
+    display: grid;
+    align-items: center;
+    grid-gap: 10px;
+    grid-template-columns: 75px 1fr;
+    width: 100%;
+    margin-bottom: 20px;
+    img{
+        width: 75px;
+        height: 75px;
+        border-radius: 100%;
+        display: block;
+        box-shadow: 0 0 20px $grey;
+    }
+    .info{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+    h3, span, p{
+        color: $black;
+    }
+    span, p{
+        font-size: 14px;
+        font-weight: 300;
+    } 
+    p{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: calc(100vw - 115px);
+    }  
+}
