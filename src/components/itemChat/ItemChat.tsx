@@ -1,48 +1,20 @@
-import { useEffect, useState } from 'react';
 import './itemChat.scss'
-import { supabase } from "../../supabaseClient";
-import { Navigate } from 'react-router-dom';
-import Splashscreen from '../../pages/splashscreen/Splashscreen';
-import Menu from '../../components/menu/Menu';
-import { menu } from '../../data/header';
+import {ItemChatType} from '../../models/ItemChat'
 
-export default function ItemChat() {
-    const [email, setEmail] = useState<string>("");
-    const [uid, setUid] = useState<string>("");
-
-    useEffect(() => {
-        const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-            console.log("Auth Event: ", event);
-            if (session && session.user) {
-                const email = session.user.email;
-                const uid = session.user.id; // Supabase utilise `id` au lieu de `uid`
-                setEmail(email ?? "");
-                setUid(uid);
-            } else {
-                <Navigate to="/signIn"/>
-            }
-        });
-
-        return () => authListener.subscription.unsubscribe();
-    })
+export default function ItemChat({imgSrc, name, date, text} : ItemChatType) {
 
     return (
-        <>
-            {(uid !== "") ? (
-              <>
-                <Menu linkMenu={menu}/>
-                <div className="main-page main-page-chat">
-                    <div className="container">
-
-                    </div>
+        <div className="itemChat">
+            <div className="itemCol">
+                <img src={imgSrc ? imgSrc : '/user.png'} alt="image user" title="images user"/>
+            </div>
+            <div className="itemCol">
+                <div className="info">
+                    <h3 className="title-h3">{name}</h3>
+                    <span className="info-date">{date}</span>
                 </div>
-                <div>ItemChat{email} {uid}</div>
-              </>  
-            ) : (
-                <Splashscreen/>
-            )}
-        </>
+                <p>{text}</p>
+            </div>
+        </div>
     )
 }
-
-ItemChat.requireAuth = true
