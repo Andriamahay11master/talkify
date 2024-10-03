@@ -5,12 +5,16 @@ import { Navigate } from 'react-router-dom';
 import Splashscreen from '../splashscreen/Splashscreen';
 import Menu from '../../components/menu/Menu';
 import { menu } from '../../data/header';
-import { listChat } from '../../data/chat';
+import { listChatData } from '../../data/chat';
 import ItemChat from '../../components/itemChat/ItemChat';
+import EmptyGabarit from '../../components/empty/EmptyGabarit';
+import { ItemChatType } from '../../models/ItemChat';
 
 export default function ChatList() {
     const [email, setEmail] = useState<string>("");
     const [uid, setUid] = useState<string>("");
+    const [listChat, setListChat] = useState<ItemChatType[]>([]); // Initialisé comme un tableau vide
+
 
     useEffect(() => {
         const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -24,9 +28,10 @@ export default function ChatList() {
                 <Navigate to="/signIn"/>
             }
         });
-
+        setListChat(listChatData);
+        
         return () => authListener.subscription.unsubscribe();
-    })
+    },[])
 
     return (
         <>
@@ -36,9 +41,13 @@ export default function ChatList() {
                 <div className="main-page main-page-chat">
                     <div className="container">
                         <div className="content">
-                            {listChat.map((chat, index) => {
-                                return <ItemChat key={index} imgSrc={chat.imgSrc} name={chat.name} date={chat.date} text={chat.text} />
-                            })}
+                            {listChat && listChat.length > 0 ? (
+                                listChat.map((chat, index) => {
+                                    return <ItemChat key={index} imgSrc={chat.imgSrc} name={chat.name} date={chat.date} text={chat.text} />;
+                                })
+                            ) : (
+                                <EmptyGabarit linkButton="/newChat" valButton="Start Chatting" />
+                            )}
                         </div>
                     </div>
                 </div>

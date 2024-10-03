@@ -13,7 +13,7 @@ export default function EmptyGabarit({linkButton, valButton} : EmptyGabaritProps
                     <p className="logoText">Talkify</p>
                 </div>
                 <p className="emptyText">You haven't chat yet</p>
-                <Link to={linkButton}>{valButton}</Link>
+                <Link className='btn btn-primary' to={linkButton}>{valButton}</Link>
             </div>
         </div>
     )

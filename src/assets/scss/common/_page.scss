@@ -25,6 +25,7 @@
       background: #FFF;
       .content{
         padding-top: 200px;
+        height: 100vh;
         @include max(992px){
           padding-top: 163px;
         }

@@ -1,4 +1,4 @@
-export const listChat = [
+export const listChatData = [
     {
         imgSrc: '/users-1.jpg',
         name: 'Ali Tahir',
